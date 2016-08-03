@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>_8.3ListView_Header_Footer</title>
+    <link href="lib/winjs-4.0.1/css/ui-light.css" rel="stylesheet" />
+    <script src="lib/winjs-4.0.1/js/base.js"></script>
+    <script src="lib/winjs-4.0.1/js/ui.js"></script>
+    <link href="css/default.css" rel="stylesheet" />
+    <script src="js/main.js"></script>
+</head>
+<body class="win-type-body">
+    <!-- Simple template for the ListView instantiation  -->
+    <div class="smallListIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+        <div class="smallListIconTextItem">
+            <img src="#" class="smallListIconTextItem-Image" data-win-bind="src: picture" />
+            <div class="smallListIconTextItem-Detail">
+                <h4 class="win-h4" data-win-bind="textContent: title"></h4>
+                <h6 class="win-h6" data-win-bind="textContent: text"></h6>
+            </div>
+        </div>
+    </div>
+
+    <!--TODO:这边bind 的问题，onclick中是eh.toggleStripes，为什么不是Sample.eh.toggleStripes-->
+    <!--非listView，需要在js中写WinJS.Binding.processAll（）才能显示，为什么 ？？？？-->
+    <!--WinJS.Binding.processAll究竟做了什么-->
+    <!-- Elements used for header and footer elements for ListView -->
+    <div class="headerFooterPlaceholder">
+        <div class="header">
+            <h2 class="win-h2">ListView Header</h2>
+            <p>Interactive content can be placed within the ListView's header element</p>
+            <div>
+                <button class="win-button" data-win-bind="onclick: eh.toggleStripes">Toggle Odd/Even</button>
+                <button class="win-button" data-win-bind="onclick: eh.resizeHeader">Resize Header</button>
+                <button class="win-button" data-win-bind="onclick: eh.removeFirstItem">Remove First Item</button>
+            </div>
+            <p>
+                <span>Number of Items: </span>
+                <span data-win-bind="textContent: data.length"></span>
+            </p>
+        </div>
+        <div class="footer">
+            <h2 class="win-h2">ListView Footer</h2>
+            <p>Interactive content can be placed within the ListView's footer element</p>
+            <div>
+                <button class="win-button" data-win-bind="onclick: eh.backToTop">Back to Top</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- The declarative markup necesary for ListView instantiation -->
+    <!-- Call WinJS.UI.processAll() in your initialization code -->
+    <div class="listView"
+         data-win-control="WinJS.UI.ListView"
+         data-win-options="{
+                itemDataSource: Sample.data.dataSource,
+                itemTemplate: select('.smallListIconTextTemplate'),
+                header: select('.header'),
+                footer: select('.footer'),
+                selectionMode: 'none',
+                tapBehavior: 'none',
+                layout: { type: WinJS.UI.ListLayout }
+        }">
+    </div>
+
+</body>
+</html>
